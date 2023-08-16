@@ -1,21 +1,34 @@
 <template>
-  <div>
+  <div style="display: flex; justify-content: space-evenly; , align-items:center;">
     <div>
-      <label for="title">Title:</label>
-      <input v-model="data.title" id="title" />
+      <div>
+        <label for="title">Title:</label>
+        <br>
+     
+        <input v-model="data.title" id="title" />
+      </div>
+      <br>
+      <br>
+      <div>
+        <label for="designation">designation:</label>
+        <br>
+        
+        <input v-model="data.designation" id="designation" />
+      </div>
+      <br>
+      <div>
+        <label for="content">Content:</label>
+        <br>
+       
+        <textarea v-model="data.content" id="content"></textarea>
+      </div>
     </div>
     <div>
-      <label for="designation">designation:</label>
-      <input v-model="data.designation" id="designation" />
-    </div>
-    <div>
-      <label for="content">Content:</label>
-      <textarea v-model="data.content" id="content"></textarea>
-    </div>
-    <button @click="fetchTemplate">Load Template</button>
+      <!-- <button @click="fetchTemplate">Load Template</button> -->
 
-    <div v-if="templateLoaded" v-html="formattedTemplate"></div>
-    <div v-else>Loading template...</div>
+      <div v-if="templateLoaded" v-html="formattedTemplate"></div>
+      <div v-else>Loading template...</div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +42,7 @@ export default {
     const data = reactive({
       title: '',
       content: '',
-      designation : '',
+      designation: '',
     });
 
     const fetchTemplate = async () => {
