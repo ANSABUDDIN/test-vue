@@ -26,8 +26,8 @@
     <div>
       <!-- <button @click="fetchTemplate">Load Template</button> -->
 
-      <div v-if="templateLoaded" v-html="formattedTemplate"></div>
-      <div v-else>Loading template...</div>
+      <!-- <div v-if="templateLoaded" v-html="formattedTemplate"></div>
+      <div v-else>Loading template...</div> -->
     </div>
   </div>
 </template>
