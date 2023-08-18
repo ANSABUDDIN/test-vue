@@ -4,7 +4,7 @@
       <div>
         <label for="title">Title:</label>
         <br>
-     
+
         <input v-model="data.title" id="title" />
       </div>
       <br>
@@ -12,22 +12,32 @@
       <div>
         <label for="designation">designation:</label>
         <br>
-        
+
         <input v-model="data.designation" id="designation" />
       </div>
       <br>
-      <div>
+      <div :draggable="'true'">
         <label for="content">Content:</label>
         <br>
-       
+
         <textarea v-model="data.content" id="content"></textarea>
       </div>
+      <br>
+      <div :draggable="'true'">
+        <label for="education">Content:</label>
+        <br>
+
+        <textarea v-model="data.education" id="education"></textarea>
+      </div>
+    </div>
+    <div v-for="item in data.skills" :key="item">
+      {{ item }}
     </div>
     <div>
-      <!-- <button @click="fetchTemplate">Load Template</button> -->
-
-      <!-- <div v-if="templateLoaded" v-html="formattedTemplate"></div>
-      <div v-else>Loading template...</div> -->
+      <button @click="viewTemplate">Load Template</button>
+      
+      <div v-if="templateLoaded" v-html="formattedTemplate"></div>
+      <div v-else>Loading template...</div>
     </div>
   </div>
 </template>
@@ -39,10 +49,13 @@ export default {
   setup() {
     const template = ref('');
     const templateLoaded = ref(false);
+    const isVeiw = ref(false);
     const data = reactive({
       title: '',
       content: '',
       designation: '',
+      education: '',
+      skills: ['Dr', 'abc']
     });
 
     const fetchTemplate = async () => {
@@ -55,6 +68,9 @@ export default {
         console.error('Error fetching template:', error);
       }
     };
+    const viewTemplate = ()=>{
+      isVeiw.value = !isVeiw.value;
+    }
 
     const formattedTemplate = computed(() => {
       if (!templateLoaded.value) {
@@ -64,7 +80,8 @@ export default {
       return template.value
         .replace('{{ title }}', data.title)
         .replace('{{ content }}', data.content)
-        .replace('{{ designation }}', data.designation);
+        .replace('{{ designation }}', data.designation)
+        .replace('{{ education }}', data.education);
     });
 
     onMounted(() => {
@@ -75,6 +92,8 @@ export default {
       formattedTemplate,
       templateLoaded,
       fetchTemplate,
+      viewTemplate,
+      isVeiw,
       data
     };
   }
